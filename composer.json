@@ -1,0 +1,18 @@
+{
+    "name": "rmhdev/cercanias-api",
+    "description": "REST API with information about routes and trains",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=5.3.3",
+        "silex/silex": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "CercaniasApi": "src/"
+        }
+    }
+}
