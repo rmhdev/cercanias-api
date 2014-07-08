@@ -24,5 +24,6 @@ class IndexTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
+        $this->assertEquals("application/json", $response->headers->get("Content-Type"));
     }
 }
