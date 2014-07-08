@@ -1,6 +1,6 @@
 <?php
 
-namespace CercaniasApi\Functional;
+namespace CercaniasApi\Tests;
 
 use Silex\WebTestCase;
 use Symfony\Component\HttpKernel\HttpKernel;

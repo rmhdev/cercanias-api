@@ -9,8 +9,8 @@ $app->get('/', function () use ($app) {
     ));
 })->bind("homepage");
 
-$app->get('/route', function () use ($app) {
-    return "";
+$app->get('/route/{routeId}', function ($routeId) use ($app) {
+    return $app->json(array());
 })->bind("route");
 
 $app->get('/timetable', function () use ($app) {
