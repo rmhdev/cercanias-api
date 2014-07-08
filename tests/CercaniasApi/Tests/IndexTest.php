@@ -2,21 +2,8 @@
 
 namespace CercaniasApi\Tests;
 
-use Silex\WebTestCase;
-use Symfony\Component\HttpKernel\HttpKernel;
-
-class IndexTest extends WebTestCase
+class IndexTest extends AbstractTest
 {
-    /**
-     * Creates the application.
-     *
-     * @return HttpKernel
-     */
-    public function createApplication()
-    {
-        return require __DIR__ . "/../../../config/env_test.php";
-    }
-
     public function testLoadIndexPage()
     {
         $client = $this->createClient();

@@ -2,21 +2,8 @@
 
 namespace CercaniasApi\Tests;
 
-use Silex\WebTestCase;
-use Symfony\Component\HttpKernel\HttpKernel;
-
-class RouteTest extends WebTestCase
+class RouteTest extends AbstractTest
 {
-    /**
-     * Creates the application.
-     *
-     * @return HttpKernel
-     */
-    public function createApplication()
-    {
-        return require __DIR__ . "/../../../config/env_test.php";
-    }
-
     public function testLoadRoutePage()
     {
         $client = $this->createClient();
