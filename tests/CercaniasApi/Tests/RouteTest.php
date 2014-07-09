@@ -4,7 +4,7 @@ namespace CercaniasApi\Tests;
 
 class RouteTest extends AbstractTest
 {
-    public function testLoadRoutePage()
+    public function notestLoadRoutePage()
     {
         $client = $this->createClient();
         $client->request("GET", "/route/1");
@@ -17,7 +17,7 @@ class RouteTest extends AbstractTest
     public function testEmptyRouteMustReturnError()
     {
         $client = $this->createClient();
-        $client->request("GET", "/route/");
+        $client->request("GET", "/route");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isClientError());
