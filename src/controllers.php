@@ -2,8 +2,6 @@
 
 /* @var Silex\Application */
 
-use Cercanias\Provider\AbstractProvider;
-
 $app->get('/', function () use ($app) {
     return $app->json(array(
         "route_url"     => "http://localhost/route",
@@ -12,24 +10,9 @@ $app->get('/', function () use ($app) {
 })->bind("homepage");
 
 $app->get('/route', function () use ($app) {
-    $routes = array(
-        array("id" => AbstractProvider::ROUTE_ASTURIAS          , "name" => "Asturias"),
-        array("id" => AbstractProvider::ROUTE_BARCELONA         , "name" => "Barcelona"),
-        array("id" => AbstractProvider::ROUTE_BILBAO            , "name" => "Bilbao"),
-        array("id" => AbstractProvider::ROUTE_CADIZ             , "name" => "Cádiz"),
-        array("id" => AbstractProvider::ROUTE_MADRID            , "name" => "Madrid"),
-        array("id" => AbstractProvider::ROUTE_MALAGA            , "name" => "Málaga"),
-        array("id" => AbstractProvider::ROUTE_MURCIA_ALICANTE   , "name" => "Murcia-Alicante"),
-        array("id" => AbstractProvider::ROUTE_SAN_SEBASTIAN     , "name" => "San Sebastián"),
-        array("id" => AbstractProvider::ROUTE_SANTANDER         , "name" => "Santander"),
-        array("id" => AbstractProvider::ROUTE_SEVILLA           , "name" => "Sevilla"),
-        array("id" => AbstractProvider::ROUTE_VALENCIA          , "name" => "Valencia"),
-        array("id" => AbstractProvider::ROUTE_ZARAGOZA          , "name" => "Zaragoza"),
+    $result = new \CercaniasApi\Result\RoutesResult();
 
-    );
-    return $app->json(array(
-        "routes" => $routes
-    ));
+    return $app->json($result->toArray());
 })->bind("route_list");
 
 $app->get('/route/{routeId}', function ($routeId) use ($app) {
