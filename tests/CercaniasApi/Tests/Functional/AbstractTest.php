@@ -14,6 +14,6 @@ abstract class AbstractTest extends WebTestCase
      */
     public function createApplication()
     {
-        return require __DIR__ . "/../../../config/env_test.php";
+        return require __DIR__ . "/../../../../config/env_test.php";
     }
 }
