@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e59f25f3a173fc524acf08b54bce54c0",
+    "hash": "8cd1b07b2b15c754b13821e632cd6f78",
     "packages": [
         {
             "name": "pimple/pimple",
@@ -91,6 +91,58 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "rmhdev/cercanias",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmhdev/cercanias.git",
+                "reference": "ecf44bd9e9d9e128f53edc8aa701ec2069719dca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmhdev/cercanias/zipball/ecf44bd9e9d9e128f53edc8aa701ec2069719dca",
+                "reference": "ecf44bd9e9d9e128f53edc8aa701ec2069719dca",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "kriswallsmith/buzz": "0.*",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "suggest": {
+                "ext-curl": "Enabling the curl extension allows you to use the CurlHttpAdapter.",
+                "kriswallsmith/buzz": "Enabling Buzz allows you to use the BuzzHttpAdapter."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cercanias\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rober Martín H",
+                    "email": "rmh.dev@gmail.com"
+                }
+            ],
+            "description": "Retrieve Renfe's Cercanías information easily",
+            "homepage": "https://github.com/rmhdev/cercanias",
+            "keywords": [
+                "cercanias",
+                "commuter",
+                "renfe",
+                "spain",
+                "train"
+            ],
+            "time": "2014-07-06 15:47:19"
         },
         {
             "name": "silex/silex",

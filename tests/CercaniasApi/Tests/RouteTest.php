@@ -4,7 +4,7 @@ namespace CercaniasApi\Tests;
 
 class RouteTest extends AbstractTest
 {
-    public function notestLoadRoutePage()
+    public function testLoadRoutePage()
     {
         $client = $this->createClient();
         $client->request("GET", "/route/1");
@@ -14,8 +14,23 @@ class RouteTest extends AbstractTest
         $this->assertEquals("application/json", $response->headers->get("Content-Type"));
     }
 
+    public function testEmptyRouteMustReturnListOfRoutes()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/route");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals("application/json", $response->headers->get("Content-Type"));
+
+        $jsonResponse = json_decode($response->getContent(), true);
+        $this->assertTrue(array_key_exists("routes", $jsonResponse));
+        $this->assertEquals(12, sizeof($jsonResponse["routes"]));
+    }
+
     public function testEmptyRouteMustReturnError()
     {
+        $this->markTestSkipped("addded to early");
         $client = $this->createClient();
         $client->request("GET", "/route");
         $response = $client->getResponse();
