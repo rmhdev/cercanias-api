@@ -9,13 +9,23 @@ class RoutesResult
     public function toArray()
     {
         return array(
-            "routes" => $this->getRoutes()
+            "routes" => $this->prepareRoutes()
         );
+    }
+
+    protected function prepareRoutes()
+    {
+        $routes = $this->getRoutes();
+        for ($i = 0; $i < sizeof($routes); $i += 1) {
+            $routes[$i]["route_url"] = "";
+        }
+
+        return $routes;
     }
 
     protected function getRoutes()
     {
-        return  array(
+        return array(
             array("id" => AbstractProvider::ROUTE_ASTURIAS          , "name" => "Asturias"),
             array("id" => AbstractProvider::ROUTE_BARCELONA         , "name" => "Barcelona"),
             array("id" => AbstractProvider::ROUTE_BILBAO            , "name" => "Bilbao"),

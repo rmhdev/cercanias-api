@@ -13,5 +13,8 @@ class RoutesResultTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(array_key_exists("routes", $result));
         $this->assertEquals(12, sizeof($result["routes"]));
+
+        $route = $result["routes"][0];
+        $this->assertTrue(array_key_exists("route_url", $route));
     }
 }
