@@ -17,7 +17,7 @@ class RoutesResult
     {
         $routes = $this->getRoutes();
         for ($i = 0; $i < sizeof($routes); $i += 1) {
-            $routes[$i]["route_url"] = "";
+            $routes[$i]["route_url"] = "http://localhost/route/" . $routes[$i]["id"];
         }
 
         return $routes;

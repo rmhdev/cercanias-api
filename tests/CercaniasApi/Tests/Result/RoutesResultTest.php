@@ -16,5 +16,6 @@ class RoutesResultTest extends \PHPUnit_Framework_TestCase
 
         $route = $result["routes"][0];
         $this->assertTrue(array_key_exists("route_url", $route));
+        $this->assertRegExp('/http:\/\/localhost\/route\/\w/', $route["route_url"]);
     }
 }
