@@ -28,11 +28,10 @@ class RouteTest extends AbstractTest
         $this->assertEquals(12, sizeof($jsonResponse["routes"]));
     }
 
-    public function testEmptyRouteMustReturnError()
+    public function testIncorrectRouteIdMustReturnError()
     {
-        $this->markTestSkipped("addded to early");
         $client = $this->createClient();
-        $client->request("GET", "/route");
+        $client->request("GET", "/route/0");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isClientError());

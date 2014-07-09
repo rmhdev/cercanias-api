@@ -16,7 +16,9 @@ $app->get('/route', function () use ($app) {
 })->bind("route_list");
 
 $app->get('/route/{routeId}', function ($routeId) use ($app) {
-    if (!$routeId) {
+    $query = new \Cercanias\Provider\RouteQuery();
+    $query->setRoute((int) $routeId);
+    if (!$query->isValid()) {
         throw new \Exception("Invalid routeId");
     }
     return $app->json(array());
