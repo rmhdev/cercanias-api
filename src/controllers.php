@@ -16,3 +16,9 @@ $app->get('/route/{routeId}', function ($routeId) use ($app) {
 $app->get('/timetable', function () use ($app) {
     return "";
 })->bind("timetable");
+
+$app->error(function (\Exception $e, $code) use ($app) {
+    return $app->json(array(
+        "message" => "Invalid routeId"
+    ));
+});
