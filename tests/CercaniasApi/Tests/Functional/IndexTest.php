@@ -21,7 +21,8 @@ class IndexTest extends AbstractTest
         $response = $client->getResponse();
 
         $jsonExpected = array(
-            "route_url"     => "http://localhost/route",
+            "routes_url"     => "http://localhost/route",
+            "route_url"     => "http://localhost/route/{routeId}",
             "timetable_url" => "http://localhost/timetable",
         );
         $jsonResponse = json_decode($response->getContent(), true);

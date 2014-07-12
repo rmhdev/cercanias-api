@@ -4,7 +4,8 @@
 
 $app->get('/', function () use ($app) {
     return $app->json(array(
-        "route_url"     => "http://localhost/route",
+        "routes_url"     => "http://localhost/route",
+        "route_url"     => "http://localhost/route/{routeId}",
         "timetable_url" => "http://localhost/timetable",
     ));
 })->bind("homepage");
