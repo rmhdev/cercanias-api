@@ -2,6 +2,8 @@
 
 namespace CercaniasApi\Tests;
 
+use Cercanias\Provider\AbstractProvider;
+
 class RouteTest extends AbstractTest
 {
     public function testLoadRoutePage()
@@ -41,5 +43,19 @@ class RouteTest extends AbstractTest
         );
         $jsonResponse = json_decode($response->getContent(), true);
         $this->assertEquals($expectedError, $jsonResponse);
+    }
+
+    public function testGetRoute()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/route/61"); // San Sebastián
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals("application/json", $response->headers->get("Content-Type"));
+
+        $jsonResponse = json_decode($response->getContent(), true);
+        $this->assertEquals("San Sebastián", $jsonResponse["name"]);
+        $this->assertEquals(61, $jsonResponse["id"]);
     }
 }

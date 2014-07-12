@@ -22,7 +22,10 @@ $app->get('/route/{routeId}', function ($routeId) use ($app) {
     if (!$query->isValid()) {
         throw new \Exception("Invalid routeId");
     }
-    return $app->json(array());
+    return $app->json(array(
+        "name" => "San Sebastián",
+        "id" => $query->getRouteId()
+    ));
 })->value("routeId", false)->bind("route");
 
 $app->get('/timetable', function () use ($app) {
