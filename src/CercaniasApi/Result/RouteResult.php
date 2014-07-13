@@ -5,7 +5,7 @@ namespace CercaniasApi\Result;
 use Cercanias\Entity\Route;
 use Cercanias\Entity\Station;
 
-class RouteResult
+class RouteResult implements ResultInterface
 {
     private $route;
 

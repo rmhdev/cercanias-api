@@ -7,7 +7,7 @@ use Cercanias\Entity\Station;
 use Cercanias\Entity\Trip;
 use Cercanias\Entity\Train;
 
-class TimetableResult
+class TimetableResult implements ResultInterface
 {
     const DATE_FORMAT = "c";
 

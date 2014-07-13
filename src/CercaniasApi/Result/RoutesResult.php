@@ -4,7 +4,7 @@ namespace CercaniasApi\Result;
 
 use Cercanias\Provider\AbstractProvider;
 
-class RoutesResult
+class RoutesResult implements ResultInterface
 {
     public function toArray()
     {
