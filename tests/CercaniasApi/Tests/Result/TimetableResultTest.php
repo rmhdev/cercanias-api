@@ -30,6 +30,7 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedDestination, $data["destination"]);
 
         $this->assertEmpty($data["transfer"]);
+        $this->assertEmpty($data["trips"]);
     }
 
     public function testTimetableWithTransferToArray()
@@ -53,5 +54,21 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
             "id" => "", "name" => "Transfer station", "route_id" => 1
         );
         $this->assertEquals($expectedTransfer, $data["transfer"]);
+
+        $expectedTrips = array(
+            array(
+                "line"      => "c1",
+                "departure" => "2014-07-13T12:00:00+02:00",
+                "arrival"   => "2014-07-13T12:35:00+02:00",
+                "transfers" => array(
+                    array(
+                        "line"      => "c2",
+                        "departure" => "2014-07-13T12:40:00+02:00",
+                        "arrival"   => "2014-07-13T12:50:00+02:00",
+                    )
+                )
+            )
+        );
+        $this->assertEquals($expectedTrips, $data["trips"]);
     }
 }

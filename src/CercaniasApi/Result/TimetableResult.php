@@ -4,9 +4,13 @@ namespace CercaniasApi\Result;
 
 use Cercanias\Entity\Timetable;
 use Cercanias\Entity\Station;
+use Cercanias\Entity\Trip;
+use Cercanias\Entity\Train;
 
 class TimetableResult
 {
+    const DATE_FORMAT = "c";
+
     private $timetable;
 
     public function __construct(Timetable $timetable)
@@ -28,6 +32,7 @@ class TimetableResult
             "departure"     => $this->toArrayDeparture(),
             "destination"   => $this->toArrayDestination(),
             "transfer"      => $this->toArrayTransfer(),
+            "trips"         => $this->toArrayTrips()
         );
     }
 
@@ -61,5 +66,43 @@ class TimetableResult
             "name"      => $this->getTimetable()->getTransferName(),
             "route_id"  => $this->getTimetable()->getDeparture()->getRouteId(),
         );
+    }
+
+    protected function toArrayTrips()
+    {
+        $result = array();
+        foreach ($this->getTimetable()->getTrips() as $trip) {
+            /* @var Trip $trip */
+            $result[] = $this->toArrayTrip($trip);
+        }
+
+        return $result;
+    }
+
+    protected function toArrayTrip(Trip $trip)
+    {
+        $train = $trip->getDepartureTrain();
+
+        return array(
+            "line"      => $train->getLine(),
+            "departure" => $train->getDepartureTime()->format(self::DATE_FORMAT),
+            "arrival"   => $train->getArrivalTime()->format(self::DATE_FORMAT),
+            "transfers" => $this->toArrayTripTransfers($trip)
+        );
+    }
+
+    protected function toArrayTripTransfers(Trip $trip)
+    {
+        $result = array();
+        foreach ($trip->getTransferTrains() as $train) {
+            /* @var Train $train */
+            $result[] = array(
+                "line"      => $train->getLine(),
+                "departure" => $train->getDepartureTime()->format(self::DATE_FORMAT),
+                "arrival"   => $train->getArrivalTime()->format(self::DATE_FORMAT),
+            );
+        }
+
+        return $result;
     }
 }
