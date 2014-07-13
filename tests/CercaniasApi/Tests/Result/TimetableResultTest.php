@@ -4,6 +4,8 @@ namespace CercaniasApi\Tests;
 
 use Cercanias\Entity\Station;
 use Cercanias\Entity\Timetable;
+use Cercanias\Entity\Train;
+use Cercanias\Entity\Trip;
 use CercaniasApi\Result\TimetableResult;
 
 class TimetableResultTest extends \PHPUnit_Framework_TestCase
@@ -26,5 +28,30 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
             "id" => "222", "name" => "Destination station", "route_id" => 1
         );
         $this->assertEquals($expectedDestination, $data["destination"]);
+
+        $this->assertEmpty($data["transfer"]);
+    }
+
+    public function testTimetableWithTransferToArray()
+    {
+        $timetable = new Timetable(
+            new Station("111", "Departure station", 1),
+            new Station("222", "Destination station", 1),
+            "Transfer station"
+        );
+        $transfers = array(
+            new Train("c2", new \DateTime("2014-07-13 12:40:00"), new \DateTime("2014-07-13 12:50:00"))
+        );
+        $timetable->addTrip(new Trip(
+            new Train("c1", new \DateTime("2014-07-13 12:00:00"), new \DateTime("2014-07-13 12:35:00")),
+            $transfers
+        ));
+        $result = new TimetableResult($timetable);
+        $data = $result->toArray();
+
+        $expectedTransfer = array(
+            "id" => "", "name" => "Transfer station", "route_id" => 1
+        );
+        $this->assertEquals($expectedTransfer, $data["transfer"]);
     }
 }

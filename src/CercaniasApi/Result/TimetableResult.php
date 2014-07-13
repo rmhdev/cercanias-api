@@ -27,6 +27,7 @@ class TimetableResult
         return array(
             "departure"     => $this->toArrayDeparture(),
             "destination"   => $this->toArrayDestination(),
+            "transfer"      => $this->toArrayTransfer(),
         );
     }
 
@@ -46,6 +47,19 @@ class TimetableResult
             "id"        => $station->getId(),
             "name"      => $station->getName(),
             "route_id"  => $station->getRouteId(),
+        );
+    }
+
+    protected function toArrayTransfer()
+    {
+        if (!$this->getTimetable()->hasTransfer()) {
+            return array();
+        }
+
+        return array(
+            "id"        => "",
+            "name"      => $this->getTimetable()->getTransferName(),
+            "route_id"  => $this->getTimetable()->getDeparture()->getRouteId(),
         );
     }
 }
