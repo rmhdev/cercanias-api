@@ -41,10 +41,10 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
             "Transfer station"
         );
         $transfers = array(
-            new Train("c2", new \DateTime("2014-07-13 12:40:00"), new \DateTime("2014-07-13 12:50:00"))
+            new Train("c2", new \DateTime("2014-07-13T12:40:00+01:00"), new \DateTime("2014-07-13T12:50:00+01:00"))
         );
         $timetable->addTrip(new Trip(
-            new Train("c1", new \DateTime("2014-07-13 12:00:00"), new \DateTime("2014-07-13 12:35:00")),
+            new Train("c1", new \DateTime("2014-07-13T12:00:00+01:00"), new \DateTime("2014-07-13T12:35:00+01:00")),
             $transfers
         ));
         $result = new TimetableResult($timetable);
@@ -58,13 +58,13 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         $expectedTrips = array(
             array(
                 "line"      => "c1",
-                "departure" => "2014-07-13T12:00:00+02:00",
-                "arrival"   => "2014-07-13T12:35:00+02:00",
+                "departure" => "2014-07-13T12:00:00+01:00",
+                "arrival"   => "2014-07-13T12:35:00+01:00",
                 "transfers" => array(
                     array(
                         "line"      => "c2",
-                        "departure" => "2014-07-13T12:40:00+02:00",
-                        "arrival"   => "2014-07-13T12:50:00+02:00",
+                        "departure" => "2014-07-13T12:40:00+01:00",
+                        "arrival"   => "2014-07-13T12:50:00+01:00",
                     )
                 )
             )
