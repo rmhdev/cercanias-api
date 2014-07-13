@@ -3,6 +3,7 @@
 namespace CercaniasApi\Result;
 
 use Cercanias\Entity\Timetable;
+use Cercanias\Entity\Station;
 
 class TimetableResult
 {
@@ -24,11 +25,27 @@ class TimetableResult
     public function toArray()
     {
         return array(
-            "departure" => array(
-                "id"        => $this->getTimetable()->getDeparture()->getId(),
-                "name"      => $this->getTimetable()->getDeparture()->getName(),
-                "route_id"  => $this->getTimetable()->getDeparture()->getRouteId(),
-            )
+            "departure"     => $this->toArrayDeparture(),
+            "destination"   => $this->toArrayDestination(),
+        );
+    }
+
+    protected function toArrayDeparture()
+    {
+        return $this->toArrayStation($this->getTimetable()->getDeparture());
+    }
+
+    protected function toArrayDestination()
+    {
+        return $this->toArrayStation($this->getTimetable()->getDestination());
+    }
+
+    protected function toArrayStation(Station $station)
+    {
+        return array(
+            "id"        => $station->getId(),
+            "name"      => $station->getName(),
+            "route_id"  => $station->getRouteId(),
         );
     }
 }
