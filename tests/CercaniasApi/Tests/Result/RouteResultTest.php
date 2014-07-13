@@ -34,10 +34,12 @@ class RouteResultTest extends \PHPUnit_Framework_TestCase
         $stations = $data["stations"];
         $this->assertEquals(3, sizeof($stations));
 
-        $station = $stations[0];
-        $this->assertEquals("111"       , $station["id"]);
-        $this->assertEquals("Station 1" , $station["name"]);
-        $this->assertEquals(61          , $station["route_id"]);
+        $expectedStations = array(
+            array("id" => "111", "name" => "Station 1", "route_id" => 61),
+            array("id" => "222", "name" => "Station 2", "route_id" => 61),
+            array("id" => "333", "name" => "Station 3", "route_id" => 61),
+        );
+        $this->assertEquals($expectedStations, $stations);
     }
 
     protected function createCompleteRoute()
