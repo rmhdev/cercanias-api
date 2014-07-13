@@ -80,7 +80,7 @@ class EmptyCercanias implements CercaniasInterface
      */
     public function getRoute($routeId)
     {
-        // TODO: Implement getRoute() method.
+
     }
 
     /**
@@ -88,6 +88,6 @@ class EmptyCercanias implements CercaniasInterface
      */
     public function getTimetable(TimetableQueryInterface $query)
     {
-        // TODO: Implement getTimetable() method.
+
     }
 }
