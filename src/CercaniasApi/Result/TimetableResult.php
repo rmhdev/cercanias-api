@@ -34,7 +34,8 @@ class TimetableResult implements ResultInterface
             "transfer"      => $this->toArrayTransfer(),
             "trips"         => $this->toArrayTrips(),
             "date"          => $this->dateToString(),
-            "return_url"    => $this->createReturnUrl()
+            "return_url"    => $this->createReturnUrl(),
+            "route_url"     => $this->createRouteUrl(),
         );
     }
 
@@ -122,11 +123,26 @@ class TimetableResult implements ResultInterface
     protected function createReturnUrl()
     {
         return sprintf(
-            "http://localhost/timetable/%s/%s/%s/%s",
+            "%s/timetable/%s/%s/%s/%s",
+            $this->getHost(),
             $this->getTimetable()->getDeparture()->getRouteId(),
             $this->getTimetable()->getDestination()->getId(),
             $this->getTimetable()->getDeparture()->getId(),
             $this->dateToString()
+        );
+    }
+
+    protected function getHost()
+    {
+        return "http://localhost";
+    }
+
+    protected function createRouteUrl()
+    {
+        return sprintf(
+            "%s/route/%s",
+            $this->getHost(),
+            $this->getTimetable()->getDeparture()->getRouteId()
         );
     }
 }

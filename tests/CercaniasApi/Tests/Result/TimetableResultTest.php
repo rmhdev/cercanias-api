@@ -74,7 +74,7 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("2014-07-13"    , $data["date"]);
     }
 
-    public function testReturnUrl()
+    public function testUrls()
     {
         $timetable = new Timetable(
             new Station("111", "Departure station", 1),
@@ -88,5 +88,6 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         $data = $result->toArray();
 
         $this->assertEquals("http://localhost/timetable/1/222/111/2014-07-13", $data["return_url"]);
+        $this->assertEquals("http://localhost/route/1", $data["route_url"]);
     }
 }

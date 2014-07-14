@@ -17,7 +17,11 @@ class RoutesResult implements ResultInterface
     {
         $routes = $this->getRoutes();
         for ($i = 0; $i < sizeof($routes); $i += 1) {
-            $routes[$i]["route_url"] = "http://localhost/route/" . $routes[$i]["id"];
+            $routes[$i]["route_url"] = sprintf(
+                "%s/route/%s",
+                $this->getHost(),
+                $routes[$i]["id"]
+            );
         }
 
         return $routes;
@@ -40,5 +44,10 @@ class RoutesResult implements ResultInterface
             array("id" => AbstractProvider::ROUTE_ZARAGOZA          , "name" => "Zaragoza"),
 
         );
+    }
+
+    protected function getHost()
+    {
+        return "http://localhost";
     }
 }

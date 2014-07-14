@@ -37,7 +37,15 @@ class RouteResult implements ResultInterface
      */
     protected function getRouteUrl()
     {
-        return sprintf("http://localhost/route/%s", $this->getRoute()->getId());
+        return sprintf("%s/route/%s",
+            $this->getHost(),
+            $this->getRoute()->getId()
+        );
+    }
+
+    protected function getHost()
+    {
+        return "http://localhost";
     }
 
     /**
