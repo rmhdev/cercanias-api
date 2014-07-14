@@ -30,13 +30,14 @@ $app->get('/route/{routeId}', function (Request $request) use ($app) {
 })->value("routeId", false)->bind("route");
 
 $app->get(
-    '/timetable/{routeId}/{departureId}/{destinationId}',
+    '/timetable/{routeId}/{departureId}/{destinationId}/{date}',
     function (Request $request) use ($app) {
         $query = new \Cercanias\Provider\TimetableQuery();
         $query
             ->setRoute(         (int) $request->get("routeId"))
             ->setDeparture(     $request->get("departureId"))
             ->setDestination(   $request->get("destinationId"))
+            ->setDate(new DateTime($request->get("date")))
         ;
         $result = new \CercaniasApi\Result\TimetableResult(
             $app["cercanias"]->getTimetable($query),
@@ -44,7 +45,7 @@ $app->get(
         );
 
         return $app->json($result->toArray());
-})->bind("timetable");
+})->value("date", "today")->bind("timetable");
 
 $app->error(function (\Exception $e, $code) use ($app) {
     return $app->json(

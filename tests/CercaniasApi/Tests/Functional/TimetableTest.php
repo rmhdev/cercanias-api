@@ -89,8 +89,16 @@ class TimetableTest extends AbstractTest
         return $timetable;
     }
 
-    public function notestCorrectRouteWithDate()
+    public function testCorrectRouteWithDate()
     {
+        $client = $this->createClientWithMockCercaniasReturnTimetable(
+            $this->createTimetable()
+        );
+        $client->request("GET", "/timetable/1/111/222/2014-07-14");
+        $response = $client->getResponse();
+        $jsonResponse = json_decode($response->getContent(), true);
 
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals("2014-07-14", $jsonResponse["date"]);
     }
 }
