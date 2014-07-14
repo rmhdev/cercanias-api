@@ -10,19 +10,20 @@ $app->get('/', function (Request $request) use ($app) {
     return $app->json(array(
         "routes_url"        => "{$baseUrl}/route",
         "route_url"         => "{$baseUrl}/route/{routeId}",
-        "timetable_url"     => "{$baseUrl}/timetable",
+        "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
     ));
 })->bind("homepage");
 
-$app->get('/route', function () use ($app) {
-    $result = new \CercaniasApi\Result\RoutesResult();
+$app->get('/route', function (Request $request) use ($app) {
+    $result = new \CercaniasApi\Result\RoutesResult($request->getSchemeAndHttpHost());
 
     return $app->json($result->toArray());
 })->bind("route_list");
 
 $app->get('/route/{routeId}', function (Request $request) use ($app) {
     $result = new \CercaniasApi\Result\RouteResult(
-        $app["cercanias"]->getRoute((int) $request->get("routeId"))
+        $app["cercanias"]->getRoute((int) $request->get("routeId")),
+        $request->getSchemeAndHttpHost()
     );
 
     return $app->json($result->toArray());
@@ -38,7 +39,8 @@ $app->get(
             ->setDestination(   $request->get("destinationId"))
         ;
         $result = new \CercaniasApi\Result\TimetableResult(
-            $app["cercanias"]->getTimetable($query)
+            $app["cercanias"]->getTimetable($query),
+            $request->getSchemeAndHttpHost()
         );
 
         return $app->json($result->toArray());
