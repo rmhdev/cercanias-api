@@ -12,10 +12,12 @@ class TimetableResult implements ResultInterface
     const DATE_FORMAT = "c";
 
     private $timetable;
+    private $serverUrl;
 
-    public function __construct(Timetable $timetable)
+    public function __construct(Timetable $timetable, $serverUrl = "http://localhost")
     {
         $this->timetable = $timetable;
+        $this->serverUrl = $serverUrl;
     }
 
     /**
@@ -124,7 +126,7 @@ class TimetableResult implements ResultInterface
     {
         return sprintf(
             "%s/timetable/%s/%s/%s/%s",
-            $this->getHost(),
+            $this->getServerUrl(),
             $this->getTimetable()->getDeparture()->getRouteId(),
             $this->getTimetable()->getDestination()->getId(),
             $this->getTimetable()->getDeparture()->getId(),
@@ -132,16 +134,16 @@ class TimetableResult implements ResultInterface
         );
     }
 
-    protected function getHost()
+    protected function getServerUrl()
     {
-        return "http://localhost";
+        return $this->serverUrl;
     }
 
     protected function createRouteUrl()
     {
         return sprintf(
             "%s/route/%s",
-            $this->getHost(),
+            $this->getServerUrl(),
             $this->getTimetable()->getDeparture()->getRouteId()
         );
     }
