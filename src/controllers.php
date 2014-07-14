@@ -2,11 +2,15 @@
 
 /* @var Silex\Application */
 
-$app->get('/', function () use ($app) {
+use Symfony\Component\HttpFoundation\Request;
+
+$app->get('/', function (Request $request) use ($app) {
+    $baseUrl = $request->getSchemeAndHttpHost();
+
     return $app->json(array(
-        "routes_url"     => "http://localhost/route",
-        "route_url"     => "http://localhost/route/{routeId}",
-        "timetable_url" => "http://localhost/timetable",
+        "routes_url"        => "{$baseUrl}/route",
+        "route_url"         => "{$baseUrl}/route/{routeId}",
+        "timetable_url"     => "{$baseUrl}/timetable",
     ));
 })->bind("homepage");
 
