@@ -37,7 +37,7 @@ $app->get(
             ->setRoute(         (int) $request->get("routeId"))
             ->setDeparture(     $request->get("departureId"))
             ->setDestination(   $request->get("destinationId"))
-            ->setDate(new DateTime($request->get("date")))
+            ->setDate(          new \DateTime($request->get("date")))
         ;
         $result = new \CercaniasApi\Result\TimetableResult(
             $app["cercanias"]->getTimetable($query),

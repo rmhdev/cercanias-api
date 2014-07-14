@@ -71,8 +71,8 @@ class TimetableTest extends AbstractTest
             new Trip(
                 new Train(
                     "c1",
-                    new \DateTime("2014-07-14T12:00:00+01:00"),
-                    new \DateTime("2014-07-14T12:55:00+01:00")
+                    new \DateTime("2014-07-14T12:00:00+02:00"),
+                    new \DateTime("2014-07-14T12:55:00+02:00")
                 )
             )
         );
@@ -80,8 +80,8 @@ class TimetableTest extends AbstractTest
             new Trip(
                 new Train(
                     "c1",
-                    new \DateTime("2014-07-14T12:35:00+01:00"),
-                    new \DateTime("2014-07-14T13:30:00+01:00")
+                    new \DateTime("2014-07-14T12:35:00+02:00"),
+                    new \DateTime("2014-07-14T13:30:00+02:00")
                 )
             )
         );
