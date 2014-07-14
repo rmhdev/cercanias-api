@@ -73,4 +73,20 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedTrips  , $data["trips"]);
         $this->assertEquals("2014-07-13"    , $data["date"]);
     }
+
+    public function testReturnUrl()
+    {
+        $timetable = new Timetable(
+            new Station("111", "Departure station", 1),
+            new Station("222", "Destination station", 1),
+            "Transfer station"
+        );
+        $timetable->addTrip(new Trip(
+            new Train("c1", new \DateTime("2014-07-13T12:00:00+02:00"), new \DateTime("2014-07-13T12:35:00+02:00"))
+        ));
+        $result = new TimetableResult($timetable);
+        $data = $result->toArray();
+
+        $this->assertEquals("http://localhost/timetable/1/222/111/2014-07-13", $data["return_url"]);
+    }
 }

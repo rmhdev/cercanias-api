@@ -34,6 +34,7 @@ class TimetableResult implements ResultInterface
             "transfer"      => $this->toArrayTransfer(),
             "trips"         => $this->toArrayTrips(),
             "date"          => $this->dateToString(),
+            "return_url"    => $this->createReturnUrl()
         );
     }
 
@@ -109,13 +110,23 @@ class TimetableResult implements ResultInterface
 
     protected function dateToString()
     {
-        if (!$this->getTimetable()->getTrips()->count()) {
-            return "";
-        }
-
+        $date = "";
         foreach ($this->getTimetable()->getTrips() as $trip) {
             /* @var Trip $trip */
-            return $trip->getDepartureTime()->format("Y-m-d");
+            $date = $trip->getDepartureTime()->format("Y-m-d");
+            break;
         }
+        return $date;
+    }
+
+    protected function createReturnUrl()
+    {
+        return sprintf(
+            "http://localhost/timetable/%s/%s/%s/%s",
+            $this->getTimetable()->getDeparture()->getRouteId(),
+            $this->getTimetable()->getDestination()->getId(),
+            $this->getTimetable()->getDeparture()->getId(),
+            $this->dateToString()
+        );
     }
 }
