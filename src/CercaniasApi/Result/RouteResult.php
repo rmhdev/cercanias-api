@@ -8,10 +8,12 @@ use Cercanias\Entity\Station;
 class RouteResult implements ResultInterface
 {
     private $route;
+    private $serverUrl;
 
-    public function __construct(Route $route)
+    public function __construct(Route $route, $serverUrl = "http://localhost")
     {
         $this->route = $route;
+        $this->serverUrl = $serverUrl;
     }
 
     public function toArray()
@@ -38,14 +40,14 @@ class RouteResult implements ResultInterface
     protected function getRouteUrl()
     {
         return sprintf("%s/route/%s",
-            $this->getHost(),
+            $this->getServerUrl(),
             $this->getRoute()->getId()
         );
     }
 
-    protected function getHost()
+    protected function getServerUrl()
     {
-        return "http://localhost";
+        return $this->serverUrl;
     }
 
     /**

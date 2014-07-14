@@ -20,6 +20,14 @@ class RouteResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $data["stations"]);
     }
 
+    public function testRouteUrlWithCustomServerUrl()
+    {
+        $route = $this->createSimpleRoute();
+        $routeResult = new RouteResult($route, "http://example.com");
+        $data = $routeResult->toArray();
+        $this->assertEquals('http://example.com/route/61', $data["url"]);
+    }
+
     protected function createSimpleRoute()
     {
         return new Route(61, "San Sebastián");
