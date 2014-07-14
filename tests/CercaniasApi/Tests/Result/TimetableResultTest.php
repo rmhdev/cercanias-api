@@ -31,6 +31,7 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEmpty($data["transfer"]);
         $this->assertEmpty($data["trips"]);
+        $this->assertEmpty($data["date"]);
     }
 
     public function testTimetableWithTransferToArray()
@@ -69,6 +70,7 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        $this->assertEquals($expectedTrips, $data["trips"]);
+        $this->assertEquals($expectedTrips  , $data["trips"]);
+        $this->assertEquals("2014-07-13"    , $data["date"]);
     }
 }
