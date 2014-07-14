@@ -18,4 +18,12 @@ class RoutesResultTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists("route_url", $route));
         $this->assertRegExp('/http:\/\/localhost\/route\/\w/', $route["route_url"]);
     }
+
+    public function testRouteUrlWithCustomServerUrl()
+    {
+        $routesResult = new RoutesResult("http://example.com");
+        $result = $routesResult->toArray();
+        $route = $result["routes"][0];
+        $this->assertRegExp('/http:\/\/example.com\/route\/\w/', $route["route_url"]);
+    }
 }

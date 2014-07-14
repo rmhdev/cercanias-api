@@ -6,6 +6,13 @@ use Cercanias\Provider\AbstractProvider;
 
 class RoutesResult implements ResultInterface
 {
+    private $serverUrl;
+
+    public function __construct($serverUrl = "http://localhost")
+    {
+        $this->serverUrl = $serverUrl;
+    }
+
     public function toArray()
     {
         return array(
@@ -19,7 +26,7 @@ class RoutesResult implements ResultInterface
         for ($i = 0; $i < sizeof($routes); $i += 1) {
             $routes[$i]["route_url"] = sprintf(
                 "%s/route/%s",
-                $this->getHost(),
+                $this->getServerUrl(),
                 $routes[$i]["id"]
             );
         }
@@ -46,8 +53,8 @@ class RoutesResult implements ResultInterface
         );
     }
 
-    protected function getHost()
+    protected function getServerUrl()
     {
-        return "http://localhost";
+        return $this->serverUrl;
     }
 }
