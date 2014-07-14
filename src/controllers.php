@@ -24,8 +24,20 @@ $app->get('/route/{routeId}', function ($routeId) use ($app) {
     return $app->json($result->toArray());
 })->value("routeId", false)->bind("route");
 
-$app->get('/timetable', function () use ($app) {
-    return "";
+$app->get(
+    '/timetable/{routeId}/{departureId}/{destinationId}',
+    function ($routeId, $departureId, $destinationId) use ($app) {
+        $query = new \Cercanias\Provider\TimetableQuery();
+        $query
+            ->setRoute((int) $routeId)
+            ->setDeparture($departureId)
+            ->setDestination($destinationId)
+        ;
+        $result = new \CercaniasApi\Result\TimetableResult(
+            $app["cercanias"]->getTimetable($query)
+        );
+
+        return $app->json($result->toArray());
 })->bind("timetable");
 
 $app->error(function (\Exception $e, $code) use ($app) {

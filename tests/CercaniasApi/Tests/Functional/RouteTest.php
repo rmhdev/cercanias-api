@@ -2,10 +2,8 @@
 
 namespace CercaniasApi\Tests;
 
-use Cercanias\CercaniasInterface;
 use Cercanias\Entity\Route;
 use Cercanias\Entity\Station;
-use Cercanias\Provider\TimetableQueryInterface;
 use Symfony\Component\HttpKernel\Client;
 
 class RouteTest extends AbstractTest
@@ -73,21 +71,4 @@ class RouteTest extends AbstractTest
     }
 }
 
-class EmptyCercanias implements CercaniasInterface
-{
-    /**
-     * {@inheritDoc}
-     */
-    public function getRoute($routeId)
-    {
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTimetable(TimetableQueryInterface $query)
-    {
-
-    }
-}
