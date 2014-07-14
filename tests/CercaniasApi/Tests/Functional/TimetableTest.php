@@ -33,8 +33,16 @@ class TimetableTest extends AbstractTest
         );
         $client->request("GET", "/timetable/1/111/222");
         $response = $client->getResponse();
-
         $this->assertTrue($response->isSuccessful());
+
+        $jsonResponse = json_decode($response->getContent(), true);
+        $this->assertEquals(3       , sizeof($jsonResponse["departure"]));
+        $this->assertEquals("111"   , $jsonResponse["departure"]["id"]);
+        $this->assertEquals(1       , $jsonResponse["departure"]["route_id"]);
+        $this->assertEquals(3       , sizeof($jsonResponse["destination"]));
+        $this->assertEquals("222"   , $jsonResponse["destination"]["id"]);
+        $this->assertEquals(2       , sizeof($jsonResponse["trips"]));
+        $this->assertEmpty($jsonResponse["transfer"]);
     }
 
     protected function createClientWithMockCercaniasReturnTimetable(Timetable $timetable)
