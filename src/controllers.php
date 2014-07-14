@@ -6,12 +6,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 $app->get('/', function (Request $request) use ($app) {
     $baseUrl = $request->getSchemeAndHttpHost();
+    $response = $app->json(
+        array(
+            "routes_url"        => "{$baseUrl}/route",
+            "route_url"         => "{$baseUrl}/route/{routeId}",
+            "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
+        )
+    );
+    //prepare cache.
 
-    return $app->json(array(
-        "routes_url"        => "{$baseUrl}/route",
-        "route_url"         => "{$baseUrl}/route/{routeId}",
-        "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
-    ));
+    return $response;
 })->bind("homepage");
 
 $app->get('/route', function (Request $request) use ($app) {

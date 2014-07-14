@@ -29,4 +29,14 @@ class IndexTest extends AbstractTest
 
         $this->assertEquals($jsonExpected, $jsonResponse);
     }
+
+    public function testCachedPage()
+    {
+        $this->markTestSkipped("Preparing test");
+        $client = $this->createClient();
+        $client->request("GET", "/");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isCacheable());
+    }
 }
