@@ -4,19 +4,10 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-$app->get('/', function (Request $request) use ($app) {
-    $baseUrl = $request->getSchemeAndHttpHost();
-    $response = $app->json(
-        array(
-            "routes_url"        => "{$baseUrl}/route",
-            "route_url"         => "{$baseUrl}/route/{routeId}",
-            "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
-        )
-    );
-    //prepare cache.
-
-    return $response;
-})->bind("homepage");
+$app->get(
+    '/',
+    'CercaniasApi\Controller\ApiController::indexAction'
+)->bind("homepage");
 
 $app->get('/route', function (Request $request) use ($app) {
     $result = new \CercaniasApi\Result\RoutesResult($request->getSchemeAndHttpHost());
