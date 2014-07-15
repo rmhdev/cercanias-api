@@ -72,6 +72,6 @@ class ApiController
             $request->getSchemeAndHttpHost()
         );
 
-        return $app->json($result->toArray());
+        return $this->createResponse($app, $result->toArray());
     }
 }

@@ -100,4 +100,17 @@ class TimetableTest extends AbstractTest
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals("2014-07-14", $jsonResponse["date"]);
     }
+
+    public function testCachedTimetable()
+    {
+        $client = $this->createClientWithMockCercaniasReturnTimetable(
+            $this->createTimetable()
+        );
+        $client->request("GET", "/timetable/1/111/222/2014-07-14");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isCacheable());
+        $this->assertEquals(3600, $response->getMaxAge());
+        $this->assertTrue($response->isValidateable());
+    }
 }
