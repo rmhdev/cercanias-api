@@ -2,8 +2,6 @@
 
 /* @var Silex\Application */
 
-use Symfony\Component\HttpFoundation\Request;
-
 $app->get(
     '/',
     'CercaniasApi\Controller\ApiController::indexAction'
@@ -21,21 +19,8 @@ $app->get(
 
 $app->get(
     '/timetable/{routeId}/{departureId}/{destinationId}/{date}',
-    function (Request $request) use ($app) {
-        $query = new \Cercanias\Provider\TimetableQuery();
-        $query
-            ->setRoute(         (int) $request->get("routeId"))
-            ->setDeparture(     $request->get("departureId"))
-            ->setDestination(   $request->get("destinationId"))
-            ->setDate(          new \DateTime($request->get("date")))
-        ;
-        $result = new \CercaniasApi\Result\TimetableResult(
-            $app["cercanias"]->getTimetable($query),
-            $request->getSchemeAndHttpHost()
-        );
-
-        return $app->json($result->toArray());
-})->value("date", "today")->bind("timetable");
+    'CercaniasApi\Controller\ApiController::timetableAction'
+)->value("date", "today")->bind("timetable");
 
 $app->error(function (\Exception $e, $code) use ($app) {
     return $app->json(

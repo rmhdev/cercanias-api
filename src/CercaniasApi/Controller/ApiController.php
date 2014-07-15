@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use CercaniasApi\Result\RoutesResult;
 use CercaniasApi\Result\RouteResult;
+use Cercanias\Provider\TimetableQuery;
+use CercaniasApi\Result\TimetableResult;
 
 class ApiController
 {
@@ -42,6 +44,23 @@ class ApiController
     {
         $result = new RouteResult(
             $app["cercanias"]->getRoute((int) $request->get("routeId")),
+            $request->getSchemeAndHttpHost()
+        );
+
+        return $app->json($result->toArray());
+    }
+
+    public function timetableAction(Request $request, Application $app)
+    {
+        $query = new TimetableQuery();
+        $query
+            ->setRoute(         (int) $request->get("routeId"))
+            ->setDeparture(     $request->get("departureId"))
+            ->setDestination(   $request->get("destinationId"))
+            ->setDate(          new \DateTime($request->get("date")))
+        ;
+        $result = new TimetableResult(
+            $app["cercanias"]->getTimetable($query),
             $request->getSchemeAndHttpHost()
         );
 
