@@ -21,13 +21,18 @@ class ApiController
     public function indexAction(Request $request, Application $app)
     {
         $baseUrl = $request->getSchemeAndHttpHost();
-        $response = $app->json(
-            array(
-                "routes_url"        => "{$baseUrl}/route",
-                "route_url"         => "{$baseUrl}/route/{routeId}",
-                "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
-            )
+        $data = array(
+            "routes_url"        => "{$baseUrl}/route",
+            "route_url"         => "{$baseUrl}/route/{routeId}",
+            "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
         );
+
+        return $this->createResponse($app, $data);
+    }
+
+    protected function createResponse(Application $app, $data = array())
+    {
+        $response = $app->json($data);
         $response->headers->add(array(
             "Cache-Control" => "public, max-age=3600, s-maxage=3600"
         ));
@@ -39,13 +44,8 @@ class ApiController
     public function routesAction(Request $request, Application $app)
     {
         $result = new RoutesResult($request->getSchemeAndHttpHost());
-        $response = $app->json($result->toArray());
-        $response->headers->add(array(
-            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
-        ));
-        $response->setEtag(md5($response->getContent()));
 
-        return $response;
+        return $this->createResponse($app, $result->toArray());
     }
 
     public function routeAction(Request $request, Application $app)
