@@ -9,11 +9,10 @@ $app->get(
     'CercaniasApi\Controller\ApiController::indexAction'
 )->bind("homepage");
 
-$app->get('/route', function (Request $request) use ($app) {
-    $result = new \CercaniasApi\Result\RoutesResult($request->getSchemeAndHttpHost());
-
-    return $app->json($result->toArray());
-})->bind("route_list");
+$app->get(
+    '/route',
+    'CercaniasApi\Controller\ApiController::routesAction'
+)->bind("route_list");
 
 $app->get('/route/{routeId}', function (Request $request) use ($app) {
     $result = new \CercaniasApi\Result\RouteResult(

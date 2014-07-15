@@ -11,6 +11,7 @@ namespace CercaniasApi\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
+use CercaniasApi\Result\RoutesResult;
 
 class ApiController
 {
@@ -27,5 +28,12 @@ class ApiController
         //prepare cache.
 
         return $response;
+    }
+
+    public function routesAction(Request $request, Application $app)
+    {
+        $result = new RoutesResult($request->getSchemeAndHttpHost());
+
+        return $app->json($result->toArray());
     }
 }
