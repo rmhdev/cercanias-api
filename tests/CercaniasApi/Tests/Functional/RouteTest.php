@@ -39,10 +39,7 @@ class RouteTest extends AbstractTest
 
     public function testGetRoute()
     {
-        $expectedRoute = new Route(61, "San Sebastián");
-        $expectedRoute->addStation(new Station("111", "Station 1", 61));
-        $expectedRoute->addStation(new Station("222", "Station 2", 61));
-        $expectedRoute->addStation(new Station("333", "Station 3", 61));
+        $expectedRoute = $this->createRoute();
         $client = $this->createClientWithMockCercaniasReturnRoute($expectedRoute);
         $client->request("GET", "/route/61");
         $response = $client->getResponse();
@@ -54,6 +51,16 @@ class RouteTest extends AbstractTest
         $this->assertEquals("San Sebastián", $jsonResponse["name"]);
         $this->assertEquals(61, $jsonResponse["id"]);
         $this->assertEquals(3, sizeof($jsonResponse["stations"]));
+    }
+
+    protected function createRoute()
+    {
+        $route = new Route(61, "San Sebastián");
+        $route->addStation(new Station("111", "Station 1", 61));
+        $route->addStation(new Station("222", "Station 2", 61));
+        $route->addStation(new Station("333", "Station 3", 61));
+
+        return $route;
     }
 
     protected function createClientWithMockCercaniasReturnRoute(Route $route)
@@ -74,6 +81,18 @@ class RouteTest extends AbstractTest
     {
         $client = $this->createClient();
         $client->request("GET", "/route");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isCacheable());
+        $this->assertEquals(3600, $response->getMaxAge());
+        $this->assertTrue($response->isValidateable());
+    }
+
+    public function testCachedRoute()
+    {
+        $expectedRoute = $this->createRoute();
+        $client = $this->createClientWithMockCercaniasReturnRoute($expectedRoute);
+        $client->request("GET", "/route/61");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isCacheable());
