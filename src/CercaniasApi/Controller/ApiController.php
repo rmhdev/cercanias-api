@@ -12,6 +12,7 @@ namespace CercaniasApi\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use CercaniasApi\Result\RoutesResult;
+use CercaniasApi\Result\RouteResult;
 
 class ApiController
 {
@@ -33,6 +34,16 @@ class ApiController
     public function routesAction(Request $request, Application $app)
     {
         $result = new RoutesResult($request->getSchemeAndHttpHost());
+
+        return $app->json($result->toArray());
+    }
+
+    public function routeAction(Request $request, Application $app)
+    {
+        $result = new RouteResult(
+            $app["cercanias"]->getRoute((int) $request->get("routeId")),
+            $request->getSchemeAndHttpHost()
+        );
 
         return $app->json($result->toArray());
     }

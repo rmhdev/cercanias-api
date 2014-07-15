@@ -14,14 +14,10 @@ $app->get(
     'CercaniasApi\Controller\ApiController::routesAction'
 )->bind("route_list");
 
-$app->get('/route/{routeId}', function (Request $request) use ($app) {
-    $result = new \CercaniasApi\Result\RouteResult(
-        $app["cercanias"]->getRoute((int) $request->get("routeId")),
-        $request->getSchemeAndHttpHost()
-    );
-
-    return $app->json($result->toArray());
-})->value("routeId", false)->bind("route");
+$app->get(
+    '/route/{routeId}',
+    'CercaniasApi\Controller\ApiController::routeAction'
+)->value("routeId", false)->bind("route");
 
 $app->get(
     '/timetable/{routeId}/{departureId}/{destinationId}/{date}',
