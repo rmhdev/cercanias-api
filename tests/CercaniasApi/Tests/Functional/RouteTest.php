@@ -69,6 +69,17 @@ class RouteTest extends AbstractTest
 
         return new Client($app);
     }
+
+    public function testCachedRouteList()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/route");
+        $response = $client->getResponse();
+
+        $this->assertTrue($response->isCacheable());
+        $this->assertEquals(3600, $response->getMaxAge());
+        $this->assertTrue($response->isValidateable());
+    }
 }
 
 

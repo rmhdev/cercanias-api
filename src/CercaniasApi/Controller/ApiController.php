@@ -39,8 +39,13 @@ class ApiController
     public function routesAction(Request $request, Application $app)
     {
         $result = new RoutesResult($request->getSchemeAndHttpHost());
+        $response = $app->json($result->toArray());
+        $response->headers->add(array(
+            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
+        ));
+        $response->setEtag(md5($response->getContent()));
 
-        return $app->json($result->toArray());
+        return $response;
     }
 
     public function routeAction(Request $request, Application $app)
