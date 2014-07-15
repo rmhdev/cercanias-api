@@ -28,7 +28,10 @@ class ApiController
                 "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
             )
         );
-        //prepare cache.
+        $response->headers->add(array(
+            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
+        ));
+        $response->setEtag(md5($response->getContent()));
 
         return $response;
     }

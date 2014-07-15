@@ -32,11 +32,12 @@ class IndexTest extends AbstractTest
 
     public function testCachedPage()
     {
-        $this->markTestSkipped("Preparing test");
         $client = $this->createClient();
         $client->request("GET", "/");
         $response = $client->getResponse();
 
         $this->assertTrue($response->isCacheable());
+        $this->assertEquals(3600, $response->getMaxAge());
+        $this->assertTrue($response->isValidateable());
     }
 }
