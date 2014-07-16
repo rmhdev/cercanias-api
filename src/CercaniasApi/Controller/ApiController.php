@@ -33,6 +33,7 @@ class ApiController
     protected function createResponse(Application $app, $data = array())
     {
         $response = $app->json($data);
+        $response->setEncodingOptions(JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_PRETTY_PRINT);
         $response->headers->add(array(
             "Cache-Control" => "public, max-age=3600, s-maxage=3600"
         ));
