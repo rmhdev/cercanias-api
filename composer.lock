@@ -98,12 +98,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rmhdev/cercanias.git",
-                "reference": "475c7e4e0c0fe73e178606075d030674b0623787"
+                "reference": "5f2c14ad28d012b58ea3999833cbe41097079015"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmhdev/cercanias/zipball/475c7e4e0c0fe73e178606075d030674b0623787",
-                "reference": "475c7e4e0c0fe73e178606075d030674b0623787",
+                "url": "https://api.github.com/repos/rmhdev/cercanias/zipball/5f2c14ad28d012b58ea3999833cbe41097079015",
+                "reference": "5f2c14ad28d012b58ea3999833cbe41097079015",
                 "shasum": ""
             },
             "require": {
@@ -142,7 +142,7 @@
                 "spain",
                 "train"
             ],
-            "time": "2014-07-16 19:09:10"
+            "time": "2014-07-16 21:24:04"
         },
         {
             "name": "silex/silex",

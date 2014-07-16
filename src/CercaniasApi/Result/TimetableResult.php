@@ -113,13 +113,12 @@ class TimetableResult implements ResultInterface
 
     protected function dateToString()
     {
-        $date = "";
-        foreach ($this->getTimetable()->getTrips() as $trip) {
-            /* @var Trip $trip */
-            $date = $trip->getDepartureTime()->format("Y-m-d");
-            break;
+        $date = $this->getTimetable()->getDate();
+        if (!$date) {
+            return "";
         }
-        return $date;
+
+        return $date->format("Y-m-d");
     }
 
     protected function createReturnUrl()
