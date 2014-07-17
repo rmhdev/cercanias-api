@@ -43,7 +43,7 @@ class TimetableTest extends AbstractTest
         $this->assertEquals("222"   , $jsonResponse["destination"]["id"]);
         $this->assertEquals(2       , sizeof($jsonResponse["trips"]));
         $this->assertEmpty($jsonResponse["transfer"]);
-        $this->assertEquals("2014-07-14", $jsonResponse["date"]);
+        $this->assertEquals("2014-07-14T00:00:00+02:00", $jsonResponse["date"]);
     }
 
     protected function createClientWithMockCercaniasReturnTimetable(Timetable $timetable)
@@ -98,7 +98,7 @@ class TimetableTest extends AbstractTest
         $jsonResponse = json_decode($response->getContent(), true);
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertEquals("2014-07-14", $jsonResponse["date"]);
+        $this->assertEquals("2014-07-14T00:00:00+02:00", $jsonResponse["date"]);
     }
 
     public function testCachedTimetable()

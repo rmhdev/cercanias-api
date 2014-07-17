@@ -70,8 +70,8 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        $this->assertEquals($expectedTrips  , $data["trips"]);
-        $this->assertEquals("2014-07-13"    , $data["date"]);
+        $this->assertEquals($expectedTrips              , $data["trips"]);
+        $this->assertEquals("2014-07-13T00:00:00+02:00" , $data["date"]);
     }
 
     public function testUrls()
