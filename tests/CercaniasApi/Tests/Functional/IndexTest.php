@@ -40,4 +40,14 @@ class IndexTest extends AbstractTest
         $this->assertEquals(3600, $response->getMaxAge());
         $this->assertTrue($response->isValidateable());
     }
+
+    public function testCorsEnabled()
+    {
+        $client = $this->createClient();
+        $client->request("GET", "/");
+        $response = $client->getResponse();
+
+        $this->assertEquals("*", $response->headers->get("Access-Control-Allow-Origin"));
+        $this->assertEquals("GET,OPTIONS", $response->headers->get("Access-Control-Allow-Methods"));
+    }
 }

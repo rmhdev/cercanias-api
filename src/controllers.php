@@ -2,6 +2,9 @@
 
 /* @var Silex\Application */
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 $app->get(
     '/',
     'CercaniasApi\Controller\ApiController::indexAction'
@@ -21,6 +24,11 @@ $app->get(
     '/timetable/{routeId}/{departureId}/{destinationId}/{date}',
     'CercaniasApi\Controller\ApiController::timetableAction'
 )->value("date", "today")->bind("timetable");
+
+$app->after(function (Request $request, Response $response) {
+    $response->headers->set("Access-Control-Allow-Origin", "*");
+    $response->headers->set("Access-Control-Allow-Methods", "GET,OPTIONS");
+});
 
 $app->error(function (\Exception $e, $code) use ($app) {
     return $app->json(
