@@ -58,7 +58,9 @@ GET -> http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{
 
 ## API responses
 
-Index url: `GET -> http://localhost:8080`
+### Index url
+
+`GET -> http://localhost:8080`
 
 ```json
 {
@@ -68,7 +70,9 @@ Index url: `GET -> http://localhost:8080`
 }
 ```
 
-Routes url: `GET -> http://localhost:8080/route`
+### Routes url:
+
+`GET -> http://localhost:8080/route`
 
 ```json
 {
@@ -83,7 +87,9 @@ Routes url: `GET -> http://localhost:8080/route`
 }
 ```
 
-Route url: `GET -> http://localhost:8080/route/61`
+### Route url
+
+`GET -> http://localhost:8080/route/61`
 
 ```json
 {
@@ -101,7 +107,9 @@ Route url: `GET -> http://localhost:8080/route/61`
 }
 ```
 
-Timetable url: `GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23`
+### Timetable url
+
+`GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23`
 
 ```json
 {
@@ -128,6 +136,53 @@ Timetable url: `GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23
     "date": "2014-07-23T00:00:00+02:00",
     "return_url": "http://localhost:8080/timetable/61/11600/11305/2014-07-23",
     "route_url": "http://localhost:8080/route/61"
+}
+```
+
+Similar url, but with transfer trains:
+
+`GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23`
+
+```json
+{
+    "departure": {
+        "id": "79600",
+        "name": "Arenys de Mar",
+        "route_id": "50"
+    },
+    "destination": {
+        "id": "71802",
+        "name": "Barcelona-Passeig de Gràcia",
+        "route_id": "50"
+    },
+    "transfer": {
+        "id": "",
+        "name": "Barcelona-El Clot-Aragò",
+        "route_id": "50"
+    },
+    "trips": [
+        {
+            "line": "r1",
+            "departure": "2014-07-23T05:59:00+02:00",
+            "arrival": "2014-07-23T06:49:00+02:00",
+            "transfers": [
+                {
+                    "line": "r2",
+                    "departure": "2014-07-23T06:56:00+02:00",
+                    "arrival": "2014-07-23T07:01:00+02:00"
+                },
+                {
+                    "line": "r2",
+                    "departure": "2014-07-23T07:10:00+02:00",
+                    "arrival": "2014-07-23T07:15:00+02:00"
+                }
+            ]
+        },
+        ...
+    ], 
+    "date": "2014-07-23T00:00:00+02:00", 
+    "return_url": "http://localhost:8080/timetable/50/71802/79600/2014-07-23", 
+    "route_url": "http://localhost:8080/route/50"
 }
 ```
 
