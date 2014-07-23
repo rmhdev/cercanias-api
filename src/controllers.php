@@ -27,7 +27,7 @@ $app->get(
 
 $app->after(function (Request $request, Response $response) {
     $response->headers->set("Access-Control-Allow-Origin", "*");
-    $response->headers->set("Access-Control-Allow-Methods", "GET,OPTIONS");
+    $response->headers->set("Access-Control-Allow-Methods", "GET");
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {

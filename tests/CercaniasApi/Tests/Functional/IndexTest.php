@@ -48,6 +48,9 @@ class IndexTest extends AbstractTest
         $response = $client->getResponse();
 
         $this->assertEquals("*", $response->headers->get("Access-Control-Allow-Origin"));
-        $this->assertEquals("GET,OPTIONS", $response->headers->get("Access-Control-Allow-Methods"));
+        $this->assertEquals("GET", $response->headers->get("Access-Control-Allow-Methods"));
     }
+
+    // Preflight requests: as this project only uses simple methods
+    // (in this case, GET) there's no need to add this feature.
 }
