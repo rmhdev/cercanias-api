@@ -66,13 +66,15 @@ GET -> http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{
 {
     "routes_url": "http://localhost:8080/route",
     "route_url": "http://localhost:8080/route/{routeId}",
-    "timetable_url": "http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{date}"
+    "timetable_url": "http://localhost:8080/timetable/{routeId}/{fromId}/{toId}/{date}"
 }
 ```
 
 ### Routes url:
 
-`GET -> http://localhost:8080/route`
+```
+GET -> http://localhost:8080/route
+```
 
 ```json
 {
@@ -89,7 +91,9 @@ GET -> http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{
 
 ### Route url
 
-`GET -> http://localhost:8080/route/61`
+```
+GET -> http://localhost:8080/route/61
+```
 
 ```json
 {
@@ -109,7 +113,9 @@ GET -> http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{
 
 ### Timetable url
 
-`GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23`
+```
+GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23
+```
 
 ```json
 {
@@ -141,7 +147,9 @@ GET -> http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{
 
 Similar url, but with transfer trains:
 
-`GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23`
+```
+GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23
+```
 
 ```json
 {
