@@ -29,7 +29,7 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expectedDestination, $data["destination"]);
 
-        $this->assertEmpty($data["transfer"]);
+        $this->assertFalse($data["transfer"]);
         $this->assertEmpty($data["trips"]);
         $this->assertEmpty($data["date"]);
     }

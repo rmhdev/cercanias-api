@@ -63,7 +63,7 @@ class TimetableResult implements ResultInterface
     protected function toArrayTransfer()
     {
         if (!$this->getTimetable()->hasTransfer()) {
-            return array();
+            return false;
         }
 
         return array(
