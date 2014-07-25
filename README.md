@@ -6,10 +6,10 @@ Access Renfe's Cercanias information through a HTTP REST API.
 
 ## Requirements
 
-The `cercanias-api` project is built using [Silex][], and has the following requirements:
+The `cercanias-api` project has the following requirements:
 
 - `PHP 5.3+`
-- A `HTTP` server. `Silex` has more information about [how to configure the server][].
+- A `HTTP` server (Apache, nginx, ...)
 
 ## Installation
 
@@ -31,15 +31,19 @@ Finally, you'll be able to retrieve all the dependencies:
 php ./composer.phar install
 ```
 
+### Configure the server
+
+This project is built using [Silex][].
+The official docs will give you more information about [how to configure your server][].
+
 If you are installing this project in a public server, make sure that:
 
-- the document root points to the `cercanias-api/web/` directory.
-- `cercanias-api/web/index_dev.php` is deleted.
-- folders in `cercanias-api/var/` must be writable by the web server.
+- the **document root** points to the `cercanias-api/web/` directory.
+- folders in `cercanias-api/var/` must be **writable** by the web server.
 
 ## Play with the API
 
-If you are using PHP 5.4+, it's built-in webserver will help you to play with this project. Just type:
+If you are using PHP 5.4+, its built-in web server will help you to play with this project:
 
 ```bash
 php -S localhost:8080 -t web web/index.php
@@ -49,18 +53,43 @@ Easy, right? Just open a browser and enter `http://localhost:8080`
 
 ## API requests
 
+Index urls:
+
 ```
 GET -> http://localhost:8080
+```
+
+Retrieve all the routes:
+
+```
 GET -> http://localhost:8080/route
+```
+
+Retrieve the stations from a route:
+
+```
 GET -> http://localhost:8080/route/{routeId}
+```
+
+Retrieve the timetable for a query:
+
+```
 GET -> http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{date}
 ```
+
+**Information about the parameters:**
+
+- `{routeId}`: (string) route id. For example, Madrid is `10`.
+- `{departureId}` and `{destinationId}`: (string) station id. For example, Oviedo is `15211`.
+- `{date}`: (string). Read more about [accepted date formats][]. For example, `2014-07-25`, `today`, `tomorrow`, etc.
 
 ## API responses
 
 ### Index url
 
-`GET -> http://localhost:8080`
+```
+GET -> http://localhost:8080
+```
 
 ```json
 {
@@ -70,7 +99,7 @@ GET -> http://localhost:8080/timetable/{routeId}/{departureId}/{destinationId}/{
 }
 ```
 
-### Routes url:
+### Routes url
 
 ```
 GET -> http://localhost:8080/route
@@ -84,7 +113,7 @@ GET -> http://localhost:8080/route
             "name": "Asturias",
             "route_url": "http://localhost:8080/route/20"
         },
-        ...
+        // ...
     ]
 }
 ```
@@ -106,7 +135,7 @@ GET -> http://localhost:8080/route/61
             "name": "Alegia de Oria",
             "route_id": "61"
         },
-        ...
+        // ...
     ]
 }
 ```
@@ -129,7 +158,7 @@ GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23
         "name": "Irun",
         "route_id": "61"
     },
-    "transfer": [],
+    "transfer": false,
     "trips": [
         {
             "line": "c1",
@@ -137,7 +166,7 @@ GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23
             "arrival": "2014-07-23T07:23:00+02:00",
             "transfers": []
         },
-        ...
+        // ...
     ],
     "date": "2014-07-23T00:00:00+02:00",
     "return_url": "http://localhost:8080/timetable/61/11600/11305/2014-07-23",
@@ -145,7 +174,7 @@ GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23
 }
 ```
 
-Similar url, but with transfer trains:
+Similar response, but with transfer trains:
 
 ```
 GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23
@@ -186,7 +215,7 @@ GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23
                 }
             ]
         },
-        ...
+        // ...
     ], 
     "date": "2014-07-23T00:00:00+02:00", 
     "return_url": "http://localhost:8080/timetable/50/71802/79600/2014-07-23", 
@@ -195,5 +224,6 @@ GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23
 ```
 
 [Silex]: http://silex.sensiolabs.org/
-[how to configure the server]: http://silex.sensiolabs.org/doc/web_servers.html
+[how to configure your server]: http://silex.sensiolabs.org/doc/web_servers.html
 [Composer]: https://getcomposer.org/
+[accepted date formats]: http://php.net/manual/en/datetime.formats.date.php
