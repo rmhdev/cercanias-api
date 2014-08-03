@@ -15,8 +15,8 @@ class RoutesResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(12, sizeof($result["routes"]));
 
         $route = $result["routes"][0];
-        $this->assertTrue(array_key_exists("route_url", $route));
-        $this->assertRegExp('/http:\/\/localhost\/route\/\w/', $route["route_url"]);
+        $this->assertTrue(array_key_exists("url", $route));
+        $this->assertRegExp('/http:\/\/localhost\/route\/\w/', $route["url"]);
     }
 
     public function testRouteUrlWithCustomServerUrl()
@@ -24,6 +24,6 @@ class RoutesResultTest extends \PHPUnit_Framework_TestCase
         $routesResult = new RoutesResult("http://example.com");
         $result = $routesResult->toArray();
         $route = $result["routes"][0];
-        $this->assertRegExp('/http:\/\/example.com\/route\/\w/', $route["route_url"]);
+        $this->assertRegExp('/http:\/\/example.com\/route\/\w/', $route["url"]);
     }
 }

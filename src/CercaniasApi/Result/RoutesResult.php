@@ -25,9 +25,9 @@ class RoutesResult implements ResultInterface
         $routes = array();
         foreach (AbstractProvider::getRoutes() as $id => $name) {
             $routes[] = array(
-                "id"        => $id,
-                "name"      => $name,
-                "route_url" => $this->getRouteUrl($id)
+                "id"    => $id,
+                "name"  => $name,
+                "url"   => $this->getRouteUrl($id)
             );
         }
 
