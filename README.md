@@ -34,9 +34,7 @@ php ./composer.phar install
 ### Configure the server
 
 This project is built using [Silex][].
-The official docs will give you more information about [how to configure your server][].
-
-If you are installing this project in a public server, make sure that:
+The official docs will give you more information about [how to configure your server][]. Make sure that:
 
 - the **document root** points to the `cercanias-api/web/` directory.
 - folders in `cercanias-api/var/` must be **writable** by the web server.
@@ -111,7 +109,7 @@ GET -> http://localhost:8080/route
         {
             "id": 20,
             "name": "Asturias",
-            "route_url": "http://localhost:8080/route/20"
+            "url": "http://localhost:8080/route/20"
         },
         // ...
     ]
@@ -159,6 +157,13 @@ GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23
         "route_id": "61"
     },
     "transfer": false,
+    "route": {
+        "id": "61",
+        "name": "San Sebastián",
+        "url": "http://localhost:8080/route/61"
+    },
+    "date": "2014-07-23T00:00:00+02:00",
+    "return_url": "http://localhost:8080/timetable/61/11600/11305/2014-07-23",
     "trips": [
         {
             "line": "c1",
@@ -167,10 +172,7 @@ GET -> http://localhost:8080/timetable/61/11305/11600/2014-07-23
             "transfers": []
         },
         // ...
-    ],
-    "date": "2014-07-23T00:00:00+02:00",
-    "return_url": "http://localhost:8080/timetable/61/11600/11305/2014-07-23",
-    "route_url": "http://localhost:8080/route/61"
+    ]
 }
 ```
 
@@ -197,6 +199,13 @@ GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23
         "name": "Barcelona-El Clot-Aragò",
         "route_id": "50"
     },
+    "route": {
+        "id": "50",
+        "name": "Barcelona",
+        "url": "http://localhost:8080/route/50"
+    },
+    "date": "2014-07-23T00:00:00+02:00",
+    "return_url": "http://localhost:8080/timetable/50/71802/79600/2014-07-23",
     "trips": [
         {
             "line": "r1",
@@ -216,10 +225,7 @@ GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23
             ]
         },
         // ...
-    ], 
-    "date": "2014-07-23T00:00:00+02:00", 
-    "return_url": "http://localhost:8080/timetable/50/71802/79600/2014-07-23", 
-    "route_url": "http://localhost:8080/route/50"
+    ]
 }
 ```
 
