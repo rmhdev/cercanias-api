@@ -22,9 +22,9 @@ class ApiController
     {
         $baseUrl = $request->getSchemeAndHttpHost();
         $data = array(
-            "routes_url"        => "{$baseUrl}/route",
-            "route_url"         => "{$baseUrl}/route/{routeId}",
-            "timetable_url"     => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}",
+            "routes_url"    => "{$baseUrl}/route",
+            "route_url"     => "{$baseUrl}/route/{routeId}",
+            "timetable_url" => "{$baseUrl}/timetable/{routeId}/{departureId}/{destinationId}/{date}",
         );
 
         return $this->createResponse($app, $data);
