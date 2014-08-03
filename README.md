@@ -229,7 +229,20 @@ GET -> http://localhost:8080/timetable/50/79600/71802/2014-07-23
 }
 ```
 
+## Copyright and license
+
+Code and documentation copyright 2014 Rober Martín H.
+Code released under [MIT license](LICENSE).
+Docs released under [Creative Commons CC BY 4.0][].
+
+## Author
+
+My name is [Rober Martín H][] ([@rmhdev][]). I'm a developer from Donostia / San Sebastián.
+
 [Silex]: http://silex.sensiolabs.org/
 [how to configure your server]: http://silex.sensiolabs.org/doc/web_servers.html
 [Composer]: https://getcomposer.org/
 [accepted date formats]: http://php.net/manual/en/datetime.formats.date.php
+[Creative Commons CC BY 4.0]: http://creativecommons.org/licenses/by/4.0/
+[Rober Martín H]: http://rmhdev.net/
+[@rmhdev]: http://twitter.com/rmhdev
