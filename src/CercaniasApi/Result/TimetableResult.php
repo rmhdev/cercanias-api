@@ -6,6 +6,7 @@ use Cercanias\Entity\Timetable;
 use Cercanias\Entity\Station;
 use Cercanias\Entity\Trip;
 use Cercanias\Entity\Train;
+use Cercanias\Provider\AbstractProvider;
 
 class TimetableResult implements ResultInterface
 {
@@ -34,10 +35,10 @@ class TimetableResult implements ResultInterface
             "departure"     => $this->toArrayDeparture(),
             "destination"   => $this->toArrayDestination(),
             "transfer"      => $this->toArrayTransfer(),
-            "trips"         => $this->toArrayTrips(),
             "date"          => $this->dateToString(self::DATE_FORMAT),
+            "route"         => $this->toArrayRoute(),
             "return_url"    => $this->createReturnUrl(),
-            "route_url"     => $this->createRouteUrl(),
+            "trips"         => $this->toArrayTrips(),
         );
     }
 
@@ -138,12 +139,24 @@ class TimetableResult implements ResultInterface
         return $this->serverUrl;
     }
 
-    protected function createRouteUrl()
+    protected function toArrayRoute()
     {
-        return sprintf(
-            "%s/route/%s",
-            $this->getServerUrl(),
-            $this->getTimetable()->getDeparture()->getRouteId()
+        $routeId = $this->getTimetable()->getDeparture()->getRouteId();
+        $routeName = "";
+        $routes = AbstractProvider::getRoutes();
+        if (array_key_exists($routeId, $routes)) {
+            $routeName = $routes[$routeId];
+        }
+
+        return array(
+            "id"    => $routeId,
+            "name"  => $routeName,
+            "url"   => $this->createRouteUrl($routeId)
         );
+    }
+
+    protected function createRouteUrl($routeId)
+    {
+        return sprintf("%s/route/%s", $this->getServerUrl(), $routeId);
     }
 }

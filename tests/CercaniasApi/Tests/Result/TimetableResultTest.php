@@ -74,13 +74,40 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("2014-07-13T00:00:00+02:00" , $data["date"]);
     }
 
+    /**
+     * @dataProvider getRouteInformationProvider()
+     */
+    public function testRouteInformation($routeId, $expectedRouteName)
+    {
+        $timetable = new Timetable(
+            new Station("111", "Departure station", $routeId),
+            new Station("222", "Destination station", $routeId)
+        );
+        $result = new TimetableResult($timetable);
+        $data = $result->toArray();
+        $expectedRoute = array(
+            "id" => $routeId,
+            "name" => $expectedRouteName,
+            "url" => "http://localhost/route/" . $routeId
+        );
+        $this->assertEquals($expectedRoute, $data["route"]);
+    }
+
+    public function getRouteInformationProvider()
+    {
+        return array(
+            array(20, "Asturias"),
+            array(1, ""),
+        );
+    }
+
     public function testUrls()
     {
         $result = new TimetableResult($this->createSimpleTimetable());
         $data = $result->toArray();
 
         $this->assertEquals("http://localhost/timetable/1/222/111/2014-07-13", $data["return_url"]);
-        $this->assertEquals("http://localhost/route/1", $data["route_url"]);
+        $this->assertEquals("http://localhost/route/1", $data["route"]["url"]);
     }
 
     protected function createSimpleTimetable()
@@ -103,6 +130,6 @@ class TimetableResultTest extends \PHPUnit_Framework_TestCase
         $data = $result->toArray();
 
         $this->assertEquals("http://example.com/timetable/1/222/111/2014-07-13", $data["return_url"]);
-        $this->assertEquals("http://example.com/route/1", $data["route_url"]);
+        $this->assertEquals("http://example.com/route/1", $data["route"]["url"]);
     }
 }
